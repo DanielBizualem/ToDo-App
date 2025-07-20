@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Profile = () => {
     const [login,setLogin] = useState(true)
@@ -31,8 +32,8 @@ const Profile = () => {
             </div>
                 :
                 <div className='flex gap-x-3'>
-                    <a href='#'>SignUp</a>
-                    <a href='#'>Login</a>
+                    <Link to='/register'>SignUp</Link>
+                    <Link to='/login'>Login</Link>
                 </div>
             }
             

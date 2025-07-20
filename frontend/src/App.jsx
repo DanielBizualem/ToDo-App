@@ -1,12 +1,19 @@
-import React from 'react'
-import Home from './Components/Home'
+import React from 'react';
+import Login from './Components/Login';
+import Register from './Components/Register';
+import { Routes, Route } from 'react-router-dom';
+import Home from './Components/Home'; // Create this component
 
 const App = () => {
   return (
     <div>
-      <Home/>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

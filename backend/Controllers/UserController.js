@@ -152,4 +152,17 @@ const uploadAvatar = async(req,res)=>{
         })
     }
 }
+
+
+
+const fetchList = async(req,res)=>{
+    try{
+        
+    }catch(error){
+        res.json({
+            success:false,
+            message:"Catch Error"
+        })
+    }
+}
 export {register,login,logout,uploadAvatar}

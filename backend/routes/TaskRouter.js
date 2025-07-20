@@ -6,7 +6,7 @@ import upload from '../middleware/multer.js'
 
 const taskRoute = express.Router()
 
-taskRoute.post('/add',addTask)
+taskRoute.post('/add',auth,addTask)
 taskRoute.post('/register',register)
 taskRoute.post('/login',login)
 taskRoute.get('/logout',auth,logout)
