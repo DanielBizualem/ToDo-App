@@ -7,11 +7,13 @@ import Home from './Components/Home'; // Create this component
 const App = () => {
   return (
     <div>
+       
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+        
     </div>
   );
 };

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [state,setState] = useState({
     email:"",
     password:""
   })
+  const navigate = useNavigate()
 
   const onChangeHandler = (e)=>{
     const name = e.target.name
@@ -17,10 +19,12 @@ const Login = () => {
     e.preventDefault()
     const response = await axios.post('http://localhost:4000/api/todo/login',state)
     if(response.data.success){
+      localStorage.setItem('token', response.data.token)
       setState({
         email:"",
         password:""
       })
+      navigate('/')
     }
   }
 
