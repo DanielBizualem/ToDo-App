@@ -28,7 +28,7 @@ const Dashboard = () => {
           </ul>
         </div>
         <div className='flex flex-col justify-center border-t border-gray-300 text-gray-500 text-[12px] mb-2 items-center gap-x-1'>
-            <p>©Adama City Administration</p>
+            <p>©X City Administration</p>
             <p>All Rights Reserved</p> 
         </div>
 
