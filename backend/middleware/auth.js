@@ -11,7 +11,7 @@ const auth = async(req,res,next)=>{
                 message:"Token not available"
             })
         }
-        const decode = await jwt.verify(token,process.env.ACCESS_TOKEN)
+        const decode = await jwt.verify(token,process.env.SECRET_ACCESS_TOKEN)
         if(!decode){
             return res.json({
                 success:false,

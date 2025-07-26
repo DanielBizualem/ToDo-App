@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import Axios from '../utils/Axios'
+import summeryApi from '../common/SummeryApi'
 const Register = () => {
     const [state,setState] = useState({
         firstname:"",
@@ -15,10 +17,16 @@ const Register = () => {
         setState(prev=>({...prev,[name]:value}))
     }
 
+    {/**const valideValue = Object.values(data).every(el=>el) */}
+
     const onSubmitHandler = async(e)=>{
         e.preventDefault()
-
-        const response = await axios.post('http://localhost:4000/api/todo/register',state)
+        {/**const response = await axios.post('http://localhost:4000/api/todo/register',state) */}
+        try{
+            const response = await Axios({
+                ...summeryApi.register,
+                data:state
+            })
         if(response.data.success){
             setState({
                 firstname:"",
@@ -27,6 +35,10 @@ const Register = () => {
                 password:""
             })
         }
+        }catch(error){
+            console.error(error)
+        }
+            
     }
 
   return (

@@ -1,8 +1,5 @@
 import React from 'react';
-import Login from './Components/Login';
-import Register from './Components/Register';
-import { Routes, Route } from 'react-router-dom';
-import Home from './Components/Home'; // Create this component
+ // Create this component
 
 const Dashboard = () => {
   return (

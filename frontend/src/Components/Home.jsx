@@ -3,8 +3,6 @@ import Form1 from './Form1'
 import Table from './Table'
 import Title from './Title'
 import Profile from './Profile'
-import Footer from './Footer'
-
 
 const Home = () => {
   return (
