@@ -1,4 +1,5 @@
 import userModel from "../models/UserModel.js"
+import FormModel from "../models/FormModel.js"
 import bcryptjs from "bcryptjs"
 import generateAccessToken from "../utils/generateAccessToken.js"
 import generateRefreshToken from "../utils/generateRefreshToken.js"
@@ -35,7 +36,7 @@ const register = async(req,res)=>{
             email,
             password:hashedPassword,
         }
-
+        
         const registerUser = new userModel(payload)
         await registerUser.save()
         return res.json({
@@ -46,7 +47,7 @@ const register = async(req,res)=>{
     }catch(error){
         res.json({
             success:false,
-            message:"Catch error"
+            message:error.message
         })
     }
 }
@@ -78,7 +79,10 @@ const login = async(req,res)=>{
         const accessToken =  await generateAccessToken(user._id)
         const refreshToken = await generateRefreshToken(user._id)
         
-        
+        const updateUser = await userModel.findByIdAndUpdate(user?._id,{
+            last_login_date: new Date()
+        })
+
         if (!accessToken || !refreshToken) {
             return res.json({
                 success:false,
@@ -95,9 +99,16 @@ const login = async(req,res)=>{
         res.cookie("accessToken",accessToken,cookieOptions)
         res.cookie("refreshToken",refreshToken,cookieOptions)
 
+        const userWithPosts = await userModel.findById(user._id).populate({path:'posts'})
+       
         return res.json({
             success:true,
             message:"Login successfully",
+            user: userWithPosts,
+            data:{
+                "accessToken":accessToken,
+                "refreshToken":refreshToken
+            }
         })
     }catch(error){
         return res.json({
@@ -207,6 +218,13 @@ const verify_otp = async(req,res)=>{
                 message:"Invalid Otp"
             })
         }
+        
+        const updateUser = await userModel.findByIdAndUpdate(user?._id,{
+            forgot_password_otp:"",
+            forgot_password_expiry:""
+        })
+
+
         return res.json({
             success:true,
             message:"Verify Successfully"
@@ -250,7 +268,7 @@ const resetPassword = async(req,res)=>{
             password:hashedPassword
         })
         return res.json({
-            success:false,
+            success:true,
             message:"Password changed"
         })
     }catch(error){
@@ -266,19 +284,19 @@ const uploadAvatar = async(req,res)=>{
         const image = req.file
         const userId = req.userId
         const upload = await uploadImageCloudinary(image)
-
         const uploadImage = await userModel.findByIdAndUpdate(userId,{
             avatar:upload.url
-        })
+        },{new:true}).lean()
 
         return res.json({
             success:true,
-            message:"Upload successfully"
+            message:"Upload successfully",
+            data:upload
         })
     }catch(error){
-        res.json({
+        return res.json({
             success:false,
-            message:"Catch error"
+            message:error.message
         })
     }
 }
@@ -326,15 +344,52 @@ const refreshToken = async(req,res)=>{
     }
 }
 
-
-const fetchList = async(req,res)=>{
+const userDetail = async(req,res)=>{
     try{
-        
+        const userId = req.userId
+
+        const user = await userModel.findById(userId).select("-password -refreshToken")
+        return res.json({
+            success:true,
+            data:user,
+            message:"user details"
+        })
     }catch(error){
-        res.json({
+        return res.status(500).json({
             success:false,
-            message:"Catch Error"
+            message:"Something wrong"
         })
     }
 }
-export {register,login,logout,uploadAvatar,forgot_password,verify_otp,resetPassword,refreshToken}
+
+const updateUserDetails = async(req,res)=>{
+    try{
+        const userId = req.userId
+        const {firstname,lastname,email,password} = req.body
+        let hashedPassword = ""
+        if(password){
+            const salt = await bcryptjs.genSalt(10)
+            hashedPassword = await bcryptjs.hash(password,salt)
+        }
+        const updateUser = await userModel.findByIdAndUpdate(userId,{
+            ...(firstname && {firstname:firstname}),
+            ...(lastname && {lastname:lastname}),
+            ...(email && {email:email}),
+            ...(password && {password:hashedPassword})
+        })
+
+        return res.json({
+            message:"Updated user successfully",
+            success:true
+        })
+    }catch(error){
+        return res.json({
+            success:false,
+            message:"Catch error"
+        })
+    }
+}
+
+
+
+export {register,login,logout,uploadAvatar,forgot_password,verify_otp,resetPassword,refreshToken,userDetail,updateUserDetails}

@@ -1,26 +1,42 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Axios from '../utils/Axios'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import summeryApi from '../common/SummeryApi'
 
 const VerifyOtp = () => {
-    const navigate = useNavigate()
   const [state,setState] = useState(["","","","","",""])
-
+  const navigate = useNavigate()
+  const inputRef = useRef([])
+  const location = useLocation()
   
+  useEffect(()=>{
+    if(!location?.state?.email){
+      navigate("/forgot-password")
+    }
+  },[])
+  {/** useLocation, useRef */}
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try{
       const response = await Axios({
-        ...summeryApi.forgot_password_otp,
-        data:state
+        ...summeryApi.forgot_password_otp_verification,
+        data:{
+          otp:state.join(""),
+          email:location?.state?.email
+        }
     })
     
       if(response.data.success){
-        setState("","","","","","")
-        navigate("/verify-otp")
+        setState(["","","","","",""])
+        navigate("/reset-password",{
+          state:{
+            data:response.data,
+            email:location?.state?.email
+          }
+        })
+
       }
 
     }catch(error){
@@ -40,11 +56,24 @@ const VerifyOtp = () => {
                 {
                     state.map((items,index)=>{
                         return (
-                            <input key={index+"otp"} onChange={()=>{const value = e.target.value 
-                                                                            const newData = [...state]
-                                                                            newData[index]=value
-                                                                            setState(newData)}} type="text" maxLength={1} value={state[index]} className="w-full max-w-16 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center font-semibold" name='otp' autoComplete='off' required />
-                        )
+                            <input key={"otp"+index}
+                            ref={(ref)=>{
+                              inputRef.current[index] = ref
+                              return ref
+                            }}
+                             value={state[index]}
+                            onChange={(e)=>{
+                              const value = e.target.value
+                              const newData = [...state]
+                              newData[index] = value
+                              setState(newData)
+
+                              if(value && index<5){
+                                inputRef.current[index+1].focus()
+                              }
+                            }}
+                            type="text" maxLength={1}  className="w-full max-w-16 bg-gray-50 border text-gray-900 text-sm rounded-lg p-2.5 dark:bg-gray-700 outline-none dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center font-semibold focus:border-amber-200 focus:border-1.5" name='otp' autoComplete='off' required />
+                        ) 
                     })
                 }
             </div>

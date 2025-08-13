@@ -24,10 +24,12 @@ const ForgotPassword = () => {
     })
     
       if(response.data.success){
+        navigate("/verify-otp",{
+          state:state
+        })
         setState({
           email:"",
         })
-        navigate("/verify-otp")
       }
 
     }catch(error){
