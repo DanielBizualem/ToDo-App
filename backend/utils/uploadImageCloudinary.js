@@ -1,11 +1,6 @@
 import {v2 as cloudinary} from 'cloudinary'
 import dotenv from 'dotenv';
 dotenv.config();
-console.log({
-    CLOUD_NAME: !!process.env.CLOUD_NAME, // Should log 'true'
-    API_KEY: !!process.env.API_KEY,       // Should log 'true'
-    API_SECRET: !!process.env.API_SECRET  // Should log 'true'
-  });
 
 cloudinary.config({
     cloud_name:process.env.CLOUD_NAME,

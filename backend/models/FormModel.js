@@ -6,7 +6,7 @@ const formSchema = new mongoose.Schema({
     date:{type:Date,default:null},
     category:{type:String,required:true},
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'userModel', required: true }
-})
+},{ timestamps: true })
 
 const FormModel = mongoose.models.form || mongoose.model('formModel',formSchema)
 

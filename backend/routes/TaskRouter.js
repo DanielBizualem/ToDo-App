@@ -1,5 +1,5 @@
 import express from 'express'
-import { addTask, fetchTask, uploadImage } from '../Controllers/TaskController.js'
+import { addTask, fetchTask, removeItem, uploadImage } from '../Controllers/TaskController.js'
 import { forgot_password, login, logout, refreshToken, register, resetPassword, updateUserDetails, uploadAvatar, userDetail, verify_otp } from '../Controllers/UserController.js'
 import auth from '../middleware/auth.js'
 import upload from '../middleware/multer.js'
@@ -19,4 +19,5 @@ taskRoute.get('/userDetail',auth,userDetail)
 taskRoute.put('/updateUser',auth,updateUserDetails)
 taskRoute.get('/fetchTask',auth,fetchTask)
 taskRoute.post('/uploadImage',auth,upload.single("image"),uploadImage)
+taskRoute.put('/remove',auth,removeItem)
 export default taskRoute

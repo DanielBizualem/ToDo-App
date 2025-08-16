@@ -48,6 +48,10 @@ const summeryApi = {
     uploadAvatar:{
         url:"api/todo/upload-avatar",
         method:"put"
+    },
+    deleteTask:{
+        url:"api/todo/remove",
+        method:"put"
     }
     
 }

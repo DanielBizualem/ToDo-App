@@ -1,6 +1,8 @@
 import FormModel from "../models/FormModel.js"
 import userModel from "../models/UserModel.js"
 import uploadImageCloudinary from "../utils/uploadImageCloudinary.js"
+import { Types } from "mongoose"
+import mongoose from "mongoose"
 
 const addTask = async(req,res)=>{
     try{
@@ -12,6 +14,7 @@ const addTask = async(req,res)=>{
                 message:"Please provide required field"
             })
         }
+     
         const owner = userId
         const payload = {
             title,description,date,category,owner
@@ -39,7 +42,7 @@ const addTask = async(req,res)=>{
 const fetchTask = async(req,res)=>{
     const userId = req.userId
     try{
-        const task = await FormModel.find({owner:userId})
+        const task = await FormModel.find({owner:userId}).sort({createdAt:-1})
         return res.json({
             success:true,
             message:"fetch successfully",
@@ -56,7 +59,21 @@ const fetchTask = async(req,res)=>{
 
 const removeItem = async(req,res)=>{
     try{
+        const { _id } = req.body
+        const checkTask = await FormModel.findById({_id})
+        if(!checkTask){
+            return res.json({
+                success:false,
+                message:"Task was not found by this id"
+            })
+        }
+        const deleteTask = await FormModel.findByIdAndDelete({_id})
         
+        return res.json({
+            success:true,
+            message:"Deleted successfully"
+        })
+
     }catch(error){
         return res.json({
             message:error.message,
@@ -83,4 +100,4 @@ const uploadImage = async(req,res)=>{
     }
 }
 
-export {addTask,fetchTask,uploadImage}
+export {addTask,fetchTask,uploadImage,removeItem}

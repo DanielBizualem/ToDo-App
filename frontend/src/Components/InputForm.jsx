@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Axios from '../utils/Axios'
 import summeryApi from '../common/SummeryApi'
-const InputForm = () => {
+const InputForm = ({fetchData}) => {
     const [control,setControl] = useState(true)
     const [task,setTask] = useState({
         title:"",
@@ -32,13 +32,14 @@ const InputForm = () => {
             date:null,
             category:""
           })
+          fetchData()
         }
       }
 
     
 
   return (
-    <div className='ml-2 sm:border-r px-6 py-5 border-gray-400'>
+    <div className='ml-2 sm:border-r px-6 py-5 border-gray-400 h-[370px]'>
         {
           control?<form onSubmit={onSubmitHandler} className={`flex flex-col gap-y-3`}>
           <div className='flex flex-col text-sm gap-y-1'>
@@ -60,10 +61,11 @@ const InputForm = () => {
               <option value="meeting">Meeting</option>
               <option value="work">Work</option>
               <option value="travel">Travel</option>
-              <option value="travel">Travel</option>
-              <option value="travel">Travel</option>
-              <option value="travel">Travel</option>
-              <option value="other">Others</option>
+              <option value="sport">Sport</option>
+              <option value="walking">Walking</option>
+              <option value="learning">Learning</option>
+              <option value="Group Event">Group Events</option>
+              <option value="Religious">Religious</option>
             </select>
           </div>
           <button type='submit' className='sm:px-4 sm:py-2 px-2 py-1 outline-none rounded bg-blue-500 text-white hover:bg-blue-600'>Add Task</button>

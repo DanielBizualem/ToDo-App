@@ -10,6 +10,7 @@ const uploadAvatar = async(image)=>{
             ...summeryApi.uploadAvatar,
             data:formData
         })
+
         return response
     }catch(error){
         console.log(error)

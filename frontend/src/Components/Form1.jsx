@@ -65,8 +65,8 @@ const Form1 = () => {
               }
                 <p>{user.firstname}</p>
               </div>:<div className='flex gap-x-2'>
-                <a href='/login' className='flex items-center bg-blue-500  rounded outline-none hover:bg-blue-600 px-4 text-white '>Login</a>
-                <a href='/register' className='flex items-center bg-blue-500 px-4 py-1 rounded outline-none hover:bg-blue-600 text-white'>SignUp</a>
+                <a href='/login' className='flex items-center bg-gradient-to-r from-blue-400 to-blue-300  rounded outline-none px-4 text-black/70'>Login</a>
+                <a href='/register' className='flex items-center bg-gradient-to-r from-blue-400 to-blue-300  rounded outline-none px-4 text-black/70'>SignUp</a>
               </div>
             }
               <div className={`absolute right-5 sm:right-30 top-10 shadow-sm ${icon?'visible':'invisible'}  transition-opacity duration-500 z-1`}>
@@ -78,9 +78,6 @@ const Form1 = () => {
       </div>
       <div className='sm:flex border px-3 border-gray-300 rounded text-gray-500'>
       
-      <div>
-        <InputForm/>
-      </div>
       <div className='w-full  border-b sm:border-none py-2 bg-blue-400 text-white rounded sm:hidden flex'>
             <button className='flex text-right text-sm hover:text-black px-2 py-1 rounded bg-red-400 text-white sm:invisible mr-2 ml-2 font-semibold' onClick={onChangeControl}>{control?'My Tasks':'Add Tasks'}</button>
         </div>
