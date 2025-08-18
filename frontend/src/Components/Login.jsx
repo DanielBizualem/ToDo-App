@@ -69,7 +69,7 @@ const Login = () => {
                 <img src="./src/assets/password.svg" alt="" className='w-5'/>
               </div>
               <div className='flex group'>
-                <input type={showPassword?"text":"password"} name='password' value={state.password} onChange={onChangeHandler} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  group-focus:ring-blue-500 focus:border-blue-500 block sm:w-[300px] ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none h-[35px] sm:h-[40px] border-r-0" placeholder="Enter Your Password"/>
+                <input type={showPassword?"text":"password"} name='password' value={state.password} onChange={onChangeHandler} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  group-focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-[300px] ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none h-[35px] sm:h-[40px] border-r-0" placeholder="Enter Your Password"/>
                 <div className='flex border  items-center justify-center pr-3 border-l-0 bg-gray-50 border-gray-300 group-focus:border-blue-500'>
                 {
                     showPassword? <img src='./src/assets/showPassword.svg' className="flex items-center ps-3.5 right-[10px] top-3 w-8 cursor-pointer" onClick={handlerShowPassword}/>:<img src='./src/assets/hidePassword.svg' className="flex items-center ps-3.5 right-[10px] top-3 w-8 cursor-pointer" onClick={handlerShowPassword}/>
