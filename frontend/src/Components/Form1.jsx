@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Axios from '../utils/Axios'
-import summeryApi from '../common/SummeryApi.js'
+
 import Table from './Table.jsx'
 import MobileTable from './MobileTable.jsx'
 import UserMenu from './UserMenu.jsx'
@@ -19,9 +18,11 @@ const Form1 = () => {
     const userData = await fetchUserDetail()
     dispatch(setUserDetails(userData.data))
   }
+
   useEffect(()=>{
     fetchUser()
   },[])
+
   const onChangeControl = ()=>{
     setControl(!control)
   }
@@ -36,20 +37,20 @@ const Form1 = () => {
     document.removeEventListener('click',handleClick)
   }
   },[])
+
   const handleProfileClick = (e) => {
     e.stopPropagation(); // Prevents the document click from firing
     setIcon(!icon);
   }
   
-  
-
   const avatar = user?.firstname?.charAt(0)?.toUpperCase()
   const avatar2 = user?.lastname?.charAt(0)?.toUpperCase()
   
 
   return (
-    <div className='sm:w-full sm:flex sm:flex-col gap-2 items-center justify-between sm:min-h-screen'>
-      <div className='flex justify-between border-b border-gray-400 w-full py-5 px-4 shadow-sm'>
+    <div className='w-full flex flex-col gap-2 items-center min-h-screen justify-between'>
+      {/**header */}
+      <div className='flex justify-between border-b border-gray-400 w-full py-5 px-4 '>
         <div className='flex gap-x-1'>
           <img src="./src/assets/checklist.png" alt="" className='sm:w-7 w-6'/>
           <p className='flex sm:text-lg font-semibold'>ToDo <span className='text-blue-500 ml-1'>App</span></p>
@@ -64,7 +65,7 @@ const Form1 = () => {
                 </div>
               }
                 <p>{user.firstname}</p>
-              </div>:<div className='flex gap-x-2'>
+              </div>:<div className='flex gap-x-2 invisible sm:visible'>
                 <a href='/login' className='flex items-center bg-gradient-to-r from-blue-400 to-blue-300  rounded outline-none px-4 text-black/70'>Login</a>
                 <a href='/register' className='flex items-center bg-gradient-to-r from-blue-400 to-blue-300  rounded outline-none px-4 text-black/70'>SignUp</a>
               </div>
@@ -76,21 +77,25 @@ const Form1 = () => {
               </div>
         </div>
       </div>
-      <div className='sm:flex border px-3 border-gray-300 rounded text-gray-500'>
-      
-      <div className='w-full  border-b sm:border-none py-2 bg-blue-400 text-white rounded sm:hidden flex'>
+
+      {/**body */}
+      <div className='flex flex-col border px-3 border-gray-300 rounded text-gray-500'>
+      <div className='w-full flex-col  border-b sm:border-none py-2 bg-blue-400 text-white rounded sm:hidden flex mt-5'>
             <button className='flex text-right text-sm hover:text-black px-2 py-1 rounded bg-red-400 text-white sm:invisible mr-2 ml-2 font-semibold' onClick={onChangeControl}>{control?'My Tasks':'Add Tasks'}</button>
         </div>
-        <div>
+        <div className='flex sm:hidden sm:w-full'>
           {
-            control?'':<MobileTable/>
+            control?<InputForm/>:<MobileTable/>
           }
         </div>
-       <div className='flex overflow-y-scroll h-[360px] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'>
+       <div className='sm:flex overflow-y-scroll h-[360px] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden hidden'>
           <Table/>
        </div>
       </div>
-      <p className='flex text-sm sm:w-full justify-center py-2 border-t border-gray-400 bg-black/85 text-white'>Developed by Daniel Bizualem @2025</p>
+      {/** footer */}
+      <div className='flex w-full mb-0'>
+        <p className='flex text-[13px] sm:text-sm w-full justify-center py-2 border-t border-gray-400 bg-black/85 text-white'>Developed by Daniel Bizualem @2025</p>
+      </div>
     </div>
   )
 }

@@ -2,16 +2,18 @@ import React, { useEffect, useState } from 'react'
 import Axios from '../utils/Axios'
 import summeryApi from '../common/SummeryApi'
 const InputForm = ({fetchData}) => {
-    const [control,setControl] = useState(true)
+    //const [control,setControl] = useState(true)
     const [task,setTask] = useState({
         title:"",
         description:"",
         date:null,
         category:""
       })
+      {/**
       const onChangeControl = ()=>{
         setControl(!control)
       }
+     */}
     const onChangeHandler = (e)=>{
         const {name,value} = e.target
         setTask(prev=>({...prev,[name]:value}))
@@ -36,12 +38,9 @@ const InputForm = ({fetchData}) => {
         }
       }
 
-    
-
   return (
     <div className='ml-2 sm:border-r px-6 py-5 border-gray-400 h-[370px]'>
-        {
-          control?<form onSubmit={onSubmitHandler} className={`flex flex-col gap-y-3`}>
+        <form onSubmit={onSubmitHandler} className={`flex flex-col gap-y-3`}>
           <div className='flex flex-col text-sm gap-y-1'>
             <p>Title:</p>
             <input type="text" name="title" onChange={onChangeHandler} id="floating_email" value={task.title} className='border border-gray-400 px-2 py-1.5 outline-none hover:border-blue-400 rounded sm:w-[230px]' placeholder="Enter a title" required />
@@ -69,8 +68,8 @@ const InputForm = ({fetchData}) => {
             </select>
           </div>
           <button type='submit' className='sm:px-4 sm:py-2 px-2 py-1 outline-none rounded bg-blue-500 text-white hover:bg-blue-600'>Add Task</button>
-        </form>:""
-        }
+        </form>
+        
         
       </div>
   )
