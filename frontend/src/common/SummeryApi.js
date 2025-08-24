@@ -53,7 +53,6 @@ const summeryApi = {
         url:"api/todo/remove",
         method:"put"
     }
-    
 }
 
 export default summeryApi

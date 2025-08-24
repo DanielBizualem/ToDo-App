@@ -42,22 +42,24 @@ const Register = () => {
     }
 
   return (
-    <div className='flex flex-col w-full items-center justify-center min-h-screen px-4 bg-gray-50'>
-        <p className='flex sm:text-xl mb-3 font-semibold gap-1 my-6'>TODO<span className=' text-blue-500'>Registration</span></p>
-        <form className='border border-gray-300 rounded p-4 w-[230px] sm:w-[480px] gap-3 bg-white'>
+    <div className='flex flex-col w-full items-center justify-center min-h-screen px-4 bg-gray-50 text-sm'>
+        <div className='flex mb-2'>
+            <p className=' text-blue-500 text-lg font-semibold'>Registration</p>
+        </div>
+        <form className='border border-gray-300 rounded p-4 w-[230px] sm:w-[480px] gap-3 bg-white justify-center'>
             <div className='flex flex-col sm:flex-row sm:gap-8'>
             <div className='flex flex-col text-gray-500 gap-2'>
                 <p>First Name:</p>
-                <input type="text" className='border border-gray-400 px-2 py-1 rounded outline-none hover:border-blue-500' autoComplete='off' value={state.firstname} name='firstname'/>
+                <input type="text" className='border border-gray-400 px-2 py-1.5 rounded outline-none hover:border-blue-500' autoComplete='off' value={state.firstname} name='firstname'/>
             </div>
             <div className='flex flex-col text-gray-500 gap-2'>
                 <p>Last Name:</p>
-                <input type="text" className='border border-gray-400 px-2 py-1 rounded outline-none hover:border-blue-500' value={state.lastname} autoComplete='off' name='lastname'/>
+                <input type="text" className='border border-gray-400 px-2 py-1.5 rounded outline-none hover:border-blue-500' value={state.lastname} autoComplete='off' name='lastname'/>
             </div>
             </div>
             <div className='flex flex-col my-3 text-gray-500'>
                 <p>Gender</p>
-                <select name="" className='border border-gray-400 px-2 py-1 rounded outline-none hover:border-blue-500 w-[200px]'>
+                <select name="" className='border border-gray-400 px-2 py-1.5 rounded outline-none hover:border-blue-500 w-[200px]'>
                     <option value="selectCategory" disabled>Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -65,19 +67,27 @@ const Register = () => {
             </div>
             <div className='flex flex-col text-gray-500 gap-2'>
                 <p>Email:</p>
-                <input type="email" className='border border-gray-400 px-2 py-1 rounded outline-none hover:border-blue-500 sm:w-[430px]' value={state.email} autoComplete='off' name='email'/>
+                <input type="email" className='border border-gray-400 px-2 py-1.5 rounded outline-none hover:border-blue-500 sm:w-[392px]' value={state.email} autoComplete='off' name='email'/>
             </div>
             <div className='flex flex-col text-gray-500 gap-2'>
                 <p>Password:</p>
-                <input type='password' className='border border-gray-400 px-2 py-1 rounded outline-none hover:border-blue-500 sm:w-[430px]' value={state.password} autoComplete='off' name='password'/>
+                <input type='password' className='border border-gray-400 px-2 py-1.5 rounded outline-none hover:border-blue-500 sm:w-[392px]' value={state.password} autoComplete='off' name='password'/>
             </div>
             <div className='flex flex-col text-gray-500 gap-2'>
                 <p>Confirm Password:</p>
-                <input type="password" className='border border-gray-400 px-2 py-1 rounded outline-none hover:border-blue-500 sm:w-[430px]' autoComplete='off' name='password'/>
+                <input type="password" className='border border-gray-400 px-2 py-1.5 rounded outline-none hover:border-blue-500 sm:w-[392px]' autoComplete='off' name='password'/>
             </div>
             <button className='flex outline-none bg-blue-500 text-white rounded px-4 py-1 mt-3'>Register</button>
-            <Link to='/login' className='text-[13px] text-blue-400 underline underline-offset-4'>Already have an account</Link>
+            <div className='text-sm flex gap-1'>
+                <p className='text-sm'>Already have an account?</p>
+                <Link to='/login' className='text-[13px] text-blue-400 underline underline-offset-4'>Login</Link>
+            </div>
+            <hr className='flex my-2'/>
+            <div>
+              <button className='flex justify-center gap-x-2 border w-full bg-blue-50 hover:bg-blue-100 cursor-pointer border-gray-300 rounded py-2 px-4 font-semibold items-center'><img src="./src/assets/google.png" alt="" className='w-6 rounded-full'/>Continue with Google</button>
+            </div>
         </form>
+        <p className='flex mt-8 text-sm text-gray-500 bg-blue-50 rounded p-1 cursor-pointer w-full justify-center'>Copyright © Daniel Bizualem. All right reserved</p>
     </div>
   )
 }

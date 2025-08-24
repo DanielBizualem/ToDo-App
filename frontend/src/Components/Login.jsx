@@ -48,8 +48,11 @@ const Login = () => {
 
   return (
     <div className='flex flex-col sm:w-full sm:items-center justify-center min-h-screen px-4 bg-gray-50'>
-      <p className='flex mb-3 font-semibold gap-1 sm:text-xl justify-center'>TODO <span className=' text-blue-500'>Login</span></p>
-        <form className='flex flex-col border sm:justify-center border-gray-300 rounded px-4 py-2 sm:p-4 text-gray-600 gap-3 sm:w-[400px] sm:h-[300px] sm:px-10 bg-white' onSubmit={onSubmitHandler}>
+      <div className='flex flex-col mb-2'>
+        <p className='flex font-semibold gap-1 sm:text-xl justify-center'>WELCOME</p>
+        <p className=' text-blue-500 text-sm'>Login in to your account!</p>
+      </div>
+        <form className='flex flex-col border sm:justify-center border-gray-300 rounded px-4 py-2 sm:p-4 text-gray-600 gap-3 sm:w-[420px] sm:h-[350px] sm:px-10 bg-white pt-8' onSubmit={onSubmitHandler}>
           <div className='flex flex-col gap-2 max-w-md'>
             <p className='text-sm'>Email</p>
             <div className="relative">
@@ -59,7 +62,7 @@ const Login = () => {
                   <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
                 </svg>
               </div>
-              <input type="email" name='email' value={state.email} onChange={onChangeHandler} autoComplete='off'  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none h-[35px] sm:h-[40px]" placeholder="Enter Your Email"/>
+              <input type="email" name='email' value={state.email} onChange={onChangeHandler} autoComplete='off'  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none h-[35px] sm:h-[40px] rounded" placeholder="Enter Your Email"/>
             </div>
           </div>
           <div className='flex flex-col gap-2 max-w-md'>
@@ -69,8 +72,8 @@ const Login = () => {
                 <img src="./src/assets/password.svg" alt="" className='w-5'/>
               </div>
               <div className='flex group'>
-                <input type={showPassword?"text":"password"} name='password' value={state.password} onChange={onChangeHandler} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  group-focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-[300px] ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none h-[35px] sm:h-[40px] border-r-0" placeholder="Enter Your Password"/>
-                <div className='flex border  items-center justify-center pr-3 border-l-0 bg-gray-50 border-gray-300 group-focus:border-blue-500'>
+                <input type={showPassword?"text":"password"} name='password' value={state.password} onChange={onChangeHandler} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm  group-focus:ring-blue-500 focus:border-blue-500 block w-full sm:w-[300px] ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none h-[35px] sm:h-[40px] rounded rounded-r-none" placeholder="Enter Your Password"/>
+                <div className='flex border  items-center justify-center pr-3 bg-gray-50 border-gray-300 group-focus:border-blue-500 border-l-0'>
                 {
                     showPassword? <img src='./src/assets/showPassword.svg' className="flex items-center ps-3.5 right-[10px] top-3 w-8 cursor-pointer" onClick={handlerShowPassword}/>:<img src='./src/assets/hidePassword.svg' className="flex items-center ps-3.5 right-[10px] top-3 w-8 cursor-pointer" onClick={handlerShowPassword}/>
                 }
@@ -79,12 +82,15 @@ const Login = () => {
             </div>
           </div>
           <div className='flex flex-col gap-2'>
-            <div className='relative'>
+            <div className='flex flex-col gap-2 relative'>
+                <Link to='/forgotPassword' className='text-blue-400 my-2 text-sm'>forgot your password?</Link>
                 <button className='bg-blue-500 text-white px-3 py-1 rounded w-[70px] sm:w-[120px]'>Login</button>
             </div>
             <div className='flex gap-1 text-[13px] w-full'>
-            <Link to='/register' className='text-blue-400 underline underline-offset-4'>Create New Account</Link>
+              <p>Don't have an Account?</p>
+              <Link to='/register' className='text-blue-400 underline underline-offset-4'>Create New Account</Link>
             </div>
+            
           </div>
         </form>
     </div>

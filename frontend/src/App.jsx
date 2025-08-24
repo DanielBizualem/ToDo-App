@@ -25,6 +25,7 @@ const App = () => {
             <Route path='/verify-otp' element={<VerifyOtp/>}/>
             <Route path='/reset-password' element={<ResetPassword/>}/>
             <Route path='/editProfile' element={<EditProfile/>}/>
+            <Route path='/forgotPassword' element={<ForgotPassword/>}/>
         </Routes>
          
     </div>

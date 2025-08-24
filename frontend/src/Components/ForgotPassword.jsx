@@ -40,8 +40,8 @@ const ForgotPassword = () => {
   
 
   return (
-    <div className='flex w-full items-center justify-center min-h-screen px-4'>
-        <form className="w-full max-w-md border rounded border-gray-300 p-8 px-20 pl-20" onSubmit={onSubmitHandler}>
+    <div className='flex w-full items-center justify-center min-h-screen px-4 bg-gray-100'>
+        <form className="w-full max-w-md border rounded border-gray-300 p-8 px-20 pl-20 bg-white" onSubmit={onSubmitHandler}>
         <h1 className='flex justify-center mb-6'>Verification By <span className='text-blue-500 font-semibold ml-2'>Email</span></h1>
         <div className="mb-5 w-full">
             <label className="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
