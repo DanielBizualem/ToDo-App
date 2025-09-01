@@ -39,7 +39,7 @@ Axios.interceptors.request.use(
 
 //extend the file span of accessToken with the help of refresh
 
-Axios.interceptors.request.use(
+Axios.interceptors.response.use(
     (response)=>{
         return response
     },
